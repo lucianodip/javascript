@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interfaz</title>
+    <style>
+        .modal{
+            position: fixed;
+            top: 0;
+            left: -200%;
+            width: 280px;
+            height: 100vh;
+            background-color:cyan;
+            text-align: center;
+            transition: left 0.5s ease;
+        }
+        .modal.opened{
+            left:0;
+        }
+
+    </style>
+
+
+</head> 
+<body>
+    <h1>Mi app</h1>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Molestias voluptatem voluptatum ex nobis iusto illo delectus officiis quia dolore eos in error aperiam, aspernatur aut tempore autem atque distinctio iste!</p>
+    <button id="btnAbrir">Abrir Modal</button>
+
+    <div id="miConfig" class="modal">
+        <h2>Configuracion</h2>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus, cum magnam? Sapiente pariatur illo et dignissimos quos inventore aperiam error dolor temporibus cupiditate quod itaque, eos doloribus quisquam eius iste.</p>
+        <button id="btnCerrar">Cerrar Modal</button>
+
+    </div>
+
+    <script>
+        const btnAbrir= document.getElementById("btnAbrir");
+        btnAbrir.onclick=function(){
+            document.getElementById("miConfig").classList.add("opened");  
+        }
+        const btnCerrar = document.getElementById("btnCerrar");
+        btnCerrar.onclick = function(){
+            document.getElementById("miConfig").classList.remove("opened");
+        }
+    </script>
+
+</body>
+</html>
