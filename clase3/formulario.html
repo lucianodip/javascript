@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrando usuario</title>
+<style>
+    form{border: 2px dotted orangered; padding: 20px;}
+    label {display: block;}
+</style>
+</head>
+<body>
+    <form action="procesar.php" method="get">
+        <label>
+            Email
+            <input type="text" name="correo">
+        </label>
+        <label>
+            Clave
+            <input type="text" name="clave">
+        </label>
+        <button>Guardar</button>
+        
+    </form>
+</body>
+</html>
+
+
+<!--
+
+1) el usuario llena el formulario y pulsa el butto
+2) el butto le avisa al form que el usuario quiere mandar los datos.
+3) el form le envia la info al server, el form construye el queryString:
+  3.1 el form busca todos los atributos que tengan el atributo name
+  3.2 geneera el queryString con los valores cargados en el value
+  3.3 envia el queryString al al archivo backend que dice el action
+________________________________________________
+  Si method es get
+  GET procesar.php?correo=juan&clave=123 HTTP/1.1
+  accept: text/html
+________________________________________________
+
+________________________________________________
+si el method es post
+GET procesar.php HTTP/1.1
+accept: text/html
+
+correo=juan&clave=123
+
+_________________________________________________
+  -->

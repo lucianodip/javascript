@@ -1,7 +1,11 @@
 const boton = document.getElementById("btn1");
-boton.addEventListener("click",agregarParrafo );
+const boton2 = document.getElementById("btn2");
+const boton3 = document.getElementById("btn3");
 
+boton.addEventListener("click",agregarParrafo );
 boton.addEventListener("click", cambiarColor);
+boton2.addEventListener("click", quitarListener);
+boton3.addEventListener("click", agregarListener);
 
 function agregarParrafo(){
     const parrafo = document.createElement("p");
@@ -11,4 +15,16 @@ function agregarParrafo(){
 
 function cambiarColor(){
     document.body.classList.toggle("tarde");
+}
+
+function quitarListener(){
+    boton.removeEventListener("click", cambiarColor );
+    boton.removeEventListener("click", agregarParrafo);
+    boton.textContent=":(";
+}
+
+function agregarListener(){
+    boton.addEventListener("click",agregarParrafo );
+    boton.addEventListener("click", cambiarColor);
+    boton.textContent="Agregar";
 }
