@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validacion sin form</title>
+    <style>
+        input:valid{
+            border: 3px solid green;
+        }
+        input:invalid{
+            border: 3px solid red;
+        }
+    </style>
+</head>
+<body>
+
+    <input id="campo1" type="text" required pattern="\d{3,6}" title="debes ingresar entre 3 y 6 digitos">
+    <input id="campo2" type="text" required pattern="\w{4,8}" title="debes ingresar entre 4 y 8 letras o numeros">
+    <button id="Validacion">Guardar</button>
+
+<script>
+    let btn = document.getElementById("validacion");
+    btn.addEventListener("click", validar);
+
+    function validar(e){
+        let input1=document.getElementById("campo1");
+        let input2=document.getElementById("campo2");
+
+    if(input1.checkValidity() && input2.checkValidity()){
+        console.log("todo ok, puedes mandar estos datos con ajax: ", input1.value, input2.value);
+    }else{
+        console.log("Campos con error");
+    }
+
+
+
+    }
+</script>
+</body>
+</html>
