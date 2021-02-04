@@ -80,6 +80,84 @@ function mostrarLenguaje(e){
 // this: es el elemento que esta asociado al listener
 
 
+//MANIPULACION DE LA PROPAGACION DE EVENTOS----------------------------------------------------------------
+var estatico = document.getElementById("estatico")
+
+estatico.addEventListener("click", function(){
+    var dinamico = document.createElement("buttom")//crea elemento boton cuando se clickea estatitico
+    dinamico.innerHTML = "dinamico"  //el boton va a tener texto "dinamico"
+    dinamico.id="dinamico"
+    document.body.appendChild(dinamico)//el boton va a estar en body
+})
+//el boton no existe en el DOM (html) no se lo puede capturar directamente. pero le podemos asignar una funcion
+// de otra forma... asignandole un evento al DOM directamente.
+
+document.addEventListener("click", function(e){ //se le agrega evento al dom
+    console.log(e.target.id)  
+    if(e.target.id =="dinamico"){  //con la funcion e.target se manipula el elemento que se clickea
+        console.log("Soy el boton dinamico")}
+})
+
+
+
+//CALLBACK ------------------------------------------------------------------------------------------------
+//enviar una funcion por parametro 
+var uno = () => {
+    console.log("Soy la funcion uno")
+}
+
+function foo(a,CALLBACK){
+    console.log(item)
+}
+
+
+//MANIPULACION DEL DOM --------------------------------------------------------------------------------------
+var parrafo = document.getElementById("parrafo")
+
+//Resize
+window.addEventListener("resize", function(){//window se refiere al navegador, resize advierte que se cambia de tamaño
+   // console.log("cambio de tamaño ")
+    parrafo.innerText="El tamaño del navegador es de: "+ 
+    window.outerHeight + "px de alto y " + window.outerWidth + "px de ancho"  //height= ancho / width = alto
+})
+
+
+
+//FORMULARIOS -------------------------------------------------------------------------------------------------
+let form = document.getElementById("formulario");
+let btn = document.getElementById("btn");
+
+//MAL
+btn.addEventListener("click", ()=>{
+    console.log("click") //el formulario por defecto cuando presionamos input envia automaticamente y recarga la pag
+                          //no te deja validar  
+})
+
+//BIEN
+form.addEventListener("submit", (e)=>{
+    e.preventDefault(); //esto anula el envio automatico y entonces se puede empezar a validar
+
+})
+
+
+
+//VALIDACION ESTANDAR DE HTML
+let input = document.querySelector("input")
+let btn = document.querySelector("button")
+
+btn.addEventListener ("click", ()=>{
+    console.log(input.checkValidity()) //checkValidity valida el requiered que esta en html devolviendo un boolean como resp.
+})
+
+
+
+
+
+
+
+
+
+
 //EJEMPLOS DE FUNCIONES-----------------------------------------------------------------------------------
 
 //Funcion normal: Suma
