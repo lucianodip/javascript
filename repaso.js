@@ -141,7 +141,7 @@ form.addEventListener("submit", (e)=>{
 
 
 
-//VALIDACION ESTANDAR DE HTML
+//VALIDACION ESTANDAR DE HTML-----------------------------------------------------------------------------------------
 let input = document.querySelector("input")
 let btn = document.querySelector("button")
 
@@ -149,6 +149,70 @@ btn.addEventListener ("click", ()=>{
     console.log(input.checkValidity()) //checkValidity valida el requiered que esta en html devolviendo un boolean como resp.
 })
 
+
+//VALIDACION CUSTOMIZADA-----------------------------------------------------------------------------------------------
+    let form = document.querySelector("form")
+    let input = document.querySelector("input")
+
+    form.addEventListener("submit", (e)=>{
+        e.preventDefault()      //anulamos el envio automatico establecido por defecto
+        let valor = input.value //con el value manipulamos los valores de los campos formularios
+        let valorSinEspacios = valor.trim() //le sacamos los espacios
+        let longitud = valorSinEspacios.length //calculamos cuantas cifras tiene el numero
+        if(longitud > 3){
+
+        }else{
+            input.setCustomValidity("Este campo tiene que tener mas de 3 caracteres")//envia el mensaje de error que quieras
+        }
+    })
+
+    //includes(""): Sirve para verificar si tal caracter esta incluido en el string. envia un boolean
+    //indexOf(""): Sirve para verificar si tal caracter esta incluido en el string. envia la posicion en el string
+    //encodeURIcomponent(""): convierte caracteres "maliciosos" en caracteres manejables/comunes
+
+
+//EXPRESIONES REGULARES-------------------------------------------------------------------------------------------------
+//secuencia de caracteres que conforman un patron de busqueda
+
+let form = document.querySelector("form")
+    let input = document.querySelector("input")
+
+    form.addEventListener("submit", (e)=>{
+        e.preventDefault()      //anulamos el envio automatico establecido por defecto
+        let valor = input.value 
+        let regexp = /^\w{5,10}$/ //1. todas las expresiones empiezan y termina con barras |2. el ^ y $ indica
+                                  // que no hay espacios entre lo que se ingrese (especie de trim) |3. \w indica
+                                  //que pueden ser caracteres alfanumericos |4. {5,10}tienen que ser entre 5 y 10 carateres
+
+        if(refexp.test(valor)){ //.test testea la variable mediante la otra variable que tiene la espresion regular
+            console.log("valido")
+        }else{
+            console.log("no valido")
+        }                         
+  })        
+
+/* 
+     \w : WORD : alfabetico y numerico
+     \W : negacion de \W
+     \d : digitos
+     \D : negacion de \d
+     \s : espacios , saltos de linea , etc
+     \S : negacion \s   
+
+ */
+
+ /**
+   
+   {N} : cantidad de veces que se repita el caracter - ej: g{1} 
+   {N,M} : minimo y maximo que se repita un carater
+   (){} : cantidad de veces que se repitan un grupo de caracteres - ej: (abc){3}
+   * : entre 0 o muchas repeticiones del caracter == {0,}
+   + : entre 0 o muchas repeticiones del caracter == {1,}
+   ^ : el comienzo de un strig - ej: ^a => arbol
+   $ : el final de un string - ej: $a => avispa
+   \b : el limite de una palabra
+
+ */
 
 
 
