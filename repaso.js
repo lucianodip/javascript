@@ -215,6 +215,57 @@ let form = document.querySelector("form")
  */
 
 
+//ASINCRICO VS SINCRONIA-------------------------------------------------------------------------------------------------
+    setTimeout(()=>{    //permite programar lineas de codigo despues de determinado tiempo
+        console.log("hola")
+    },1000) //despues de 1000 milisegundos(un segundo) ejecuta la funcion
+
+    console.log()
+    console.log()
+    console.log()
+    console.log()
+
+   
+//AJAX--------------------------------------------------------------------------------------------------
+//ajax permite la tranferencia de datos de una maquina a la otra de manera asincronica
+//protocolo http, protocolo estandar de la wep para tranferencia de datos mediante www.
+
+//contente-lenght : numero b                            //indispensables para el ajax porque tiene informacion
+//content-type: image/jpg image/png text/html           //para tranferencia de datos
+
+
+
+//TRANFERENCIA DE RECURSOS SINCRONICA--------------------------------------------------------------------
+//XMLHttpRequest / XHR / AJAX / Async Javascript and XML
+//Antes solo se podian tranferir archivos xml, ahora con la tecnologia de la api XHR (XMLHttpRequest) se puede tanferir de todo
+
+
+let xhr = new XMLHttpRequest // de esta manera nos va a dar como resultqado un objeto de tipo XHR
+XHR.readyState  //seria el cartero encargado de llevar la solicitud
+
+/** ESTADOS
+ *  0 - Objeto instancia/clonado
+ *  1 - Objeto configurado ---sabe donde tiene que ir y donde tiene que llegar
+ *  2 - Headers fueron enviados y recibido - ya sabes la respuesta que vas obtener
+ *  3 - descargando activamente informacion 
+ *  4 - Finalizado - no necesario
+ */
+
+
+let xhr = new XMLHttpRequest
+
+xhr.open("get", "text.txt");//conlleva tres parametros para llevarse a cabo
+                    //1 metodo:  get - post - put - patch - delete
+                    //pedidos internos o externos: url o ubicacion de archivo
+    
+//Envio
+xhr.send();
+
+
+
+
+
+
 
 
 
