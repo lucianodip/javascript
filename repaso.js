@@ -261,6 +261,34 @@ xhr.open("get", "text.txt");//conlleva tres parametros para llevarse a cabo
 //Envio
 xhr.send();
 
+//PROPIEDADES XHR ---------------------------------------------------------------------------------------------------
+let xhr = new XMLHttpRequest
+xhr.open("get", "text.txt");
+//readystatechange
+xhr.addEventListener("readystatechange", () =>{ //muestra como el estado va cambiando 
+    console.log("Estado Actual : ", xhr.readyState)
+    
+    if(xhr.readyState == 4){
+        console.log(xhr.response)
+    }
+})
+
+xhr.send();
+
+
+// xhr.response = muestra el contenido que se pidio
+// readystate = muestra el estado del pedido
+
+
+//SPA -----------------------------------------------------------------------------------------------------------------
+
+//Navegacion artificial en la cual se van inyectanto contenido dinamicamente a partir de la api XMLHttpRequest (ajax)
+
+
+
+
+
+
 
 
 
@@ -280,11 +308,12 @@ function sumar (a,b){
   let total = a + b;
     return total;
 }
-
+//_____________________________________________________________________________________________________________
 
 //Funcion flecha: Resta
 const restar = (a,b) => a - b; // simplicada, funcion flecha
 
+//_____________________________________________________________________________________________________________
 
 //Este algoritmo lo primero que hace es guardar un boton por el id en una variable (btnAccion), luego utiliza 
 //addEventListener para que cuando hagan click se active una funcion en la cual primeramente a la variable
@@ -297,6 +326,7 @@ btnAccion.addEventListener("click", function(){
 }
 )
 
+//_____________________________________________________________________________________________________________
 
 //Este algoritmo primeramente crea un array "misPaises", luego captura a paises (un div), luego crea un fragmento
 const misPaises = ["Argentina", "Brasil", "Chile", "holanda"];
@@ -313,6 +343,7 @@ misPaises.forEach(function(pais){     //el foreach itera a misPaises
 
 ul.appendChild(fragmento);
 
+//_____________________________________________________________________________________________________________
 
 //este algoritmo primeramente captura botonera, luego le agrega un addEventListener con la funcion determinada
 //la funcion mostrarLenguaje(e) aplica un if en cual si el nombre es igual div retorna la variable. 
@@ -324,3 +355,95 @@ function mostrarLenguaje(e){
     if(e.target.tagnName == "DIV"){  //tagnName retorna el nombre 
         return;
     }
+
+//_____________________________________________________________________________________________________________
+
+//Este metodo lo que es traer e insertar una plantilla previamente marcada en un archivo html principal
+// esto ocurre cuando le 
+let btn = document.querySelector("button")
+btn.addEventListener("click", ()=>{ //cuando se clikea el boton arranca la funcion
+    let xhr = new XMLHttpRequest;
+
+    xhr.open("get", "plantilla.html")// hace el pedido
+
+    xhr.addEventListener("load", () =>{//cuando haya finalizado (load) se ejecuta otra funcion
+        if(xhr.status == 200){
+            let plantilla = xhr.response // se guarda el contenido en una variable
+            let div = document.createElement("div") //se crea un div
+            div.innerHTML = plantilla //al div creado se le mete plantilla
+            document.body.appendChild(div)//el div se hace hijo de body en el html
+        }
+    })
+    xhr.send();
+})
+//_____________________________________________________________________________________________________________
+
+// este metodo posee la funcion de consultar al servidor lo que se quiera mostrar por pantalla
+function ajax(url,metodo){
+    //si no recibe parametro entonces el metodo es get
+    let http_metodo = metodo || "GET"
+    let xhr = new XMLHttpRequest //Esta api consulta el contenido
+    xhr.open(http_metodo,url)
+    xhr.send()
+    //Retorno el objeto XHR entero ya que no se puede retornar la respuesta
+    return xhr
+
+}
+
+
+//INYECCION DE CONTENIDO DINAMICAMETE EN EL MAIN
+    let links = document.querySelectorAll("a"); //toma todos los link "a" y los mete en un Array 
+    let main = document.querySelector("main")//leccinamos el main(ahi le vamos a meter el contenido perrito)
+    
+    links.forEach(e,(link)=>{  //Recorre el array
+        link.addEventListener("click",()=>{  //por cada link que se clickee va a pasar..
+           e.preventDefault() 
+            let id = link.id // le sacamos el id a los links
+            let archivo = id + ".html" //concatenamos el id con .html para fabricar una url
+            let xhr = ajax(archivo)  //llamamos a la funcion ajax hecha previamente
+            xhr.addEventListener("load",()=>{ // le decimos que cuando termine la funcion
+                if (xhr.status = 200){ //comprobamos que el status sea exitoso
+                    main.innerHTML = xhr.response //le metemos lo que trajimos al main
+                }
+            })
+        })
+    })
+
+//_____________________________________________________________________________________________________________
+
+//INYECCION DE CONTENIDO DINAMICAMETE EN EL MAIN PERO UTILIZANDO HASH PARA LOGRAR RETROCEDER EN LA NAVEGACION
+function ajax(url,metodo){
+    //si no recibe parametro entonces el metodo es get
+    let http_metodo = metodo || "GET"
+    let xhr = new XMLHttpRequest //Esta api consulta el contenido
+    xhr.open(http_metodo,url)
+    xhr.send()
+    //Retorno el objeto XHR entero ya que no se puede retornar la respuesta
+    return xhr
+
+}
+
+let links = document.querySelectorAll("a"); 
+let main = document.querySelector("main")
+
+links.forEach((link)=>{  
+    link.addEventListener("click",()=>{ 
+        let id = link.id 
+       
+        location.hash = link.id // el hash va a ser el id de cada perfil
+        
+    })
+})
+
+window.addEventListener("hashchange",()=>{
+    let archivo = location.hash.split("#")[1] + ".html" 
+    let xhr = ajax(archivo)  
+    xhr.addEventListener("load",()=>{ 
+        if (xhr.status = 200){ 
+            main.innerHTML = xhr.response 
+        }
+    })
+})
+
+
+//_____________________________________________________________________________________________________________
